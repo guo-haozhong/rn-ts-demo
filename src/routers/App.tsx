@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import { PermissionsAndroid, Platform, StatusBar } from 'react-native';
 import { Provider } from 'react-redux';
 import { ReduxStore, persistor } from '@/reduxState/store';
@@ -8,9 +8,9 @@ import { RootSiblingParent } from 'react-native-root-siblings';
 import checkPushyUpdate from '@/utils/checkPushyUpdate';
 
 export default function App() {
-  const [permissionsGranted, setPermissionsGranted] = React.useState(false);
+  const [permissionsGranted, setPermissionsGranted] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     function checkPermissions() {
       const PERMISSIONS = [
         PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
@@ -40,7 +40,7 @@ export default function App() {
   }
   return (
     <Provider store={ReduxStore}>
-      <StatusBar translucent={true} backgroundColor="transparent" />
+      <StatusBar translucent={true} backgroundColor="transparent" barStyle={'dark-content'}/>
       <PersistGate loading={null} persistor={persistor}>
         <RootSiblingParent>
           <RootScreen />
